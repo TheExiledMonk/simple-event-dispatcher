@@ -9,8 +9,42 @@ Usage
 -----
 
 ```php
+    require_once('Events.php');
+    
+    // Register an event for every time a user is created
+    \simple_event_dispatcher\Events::register('user', 'create', function($namespace, $event, &$parameters) { 
 
-TODO
+        // Your code here
+
+    });
+
+
+    .
+    .
+    .
+
+    class MyExampleFrameworkUser {
+
+        ...
+
+
+        public function Create($username, $passcode) {
+
+            ...
+
+            // User creation code
+
+            ...
+
+
+            // Ok, user is created, tell anyone who's interested
+            \simple_event_dispatcher\Events::trigger('user', 'create', [
+                'user' => $new_user
+            ]);
+
+        }
+
+    }
 
 ```
 
