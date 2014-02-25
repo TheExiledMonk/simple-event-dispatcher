@@ -5,6 +5,8 @@ This is a simple event dispatcher and handling library for PHP. I found I kept h
 to cut and paste this about, so instead I decided to put it into its own library
 with hopes of saving me some time.
 
+One particularly useful feature of this code is that it supports Regex wildcards on handlers.
+
 Usage
 -----
 
