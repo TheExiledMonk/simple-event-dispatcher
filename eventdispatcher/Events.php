@@ -2,7 +2,10 @@
 
 /**
  * @file
- * Event handling.
+ * Simple Event Dispatcher.
+ * 
+ * This is a simple framework for triggering events and registering handlers, supporting 
+ * regex wildcards.
  * 
  * @package core
  * @copyright Marcus Povey 2014
