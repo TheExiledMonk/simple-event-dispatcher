@@ -104,11 +104,15 @@ namespace simple_event_dispatcher {
         public static function trigger($namespace, $event, array $parameters = NULL) {           
             $merged = array();
             if (!$parameters)
-                $parameters = array(
+                $parameters = array();
+
+            $default = array(
                     'halt' => false,
                     'return' => null
                 );
-
+            
+            $parameters = array_merge($default, $parameters);
+            
             if (!self::$events)
                 self::$events = array();
 
@@ -139,7 +143,7 @@ namespace simple_event_dispatcher {
                 $result = call_user_func_array($function, array($namespace, $event, $parameters));
                 
                 if (isset($result)) $parameters['return'] = $result;
-                if ($parameters['halt'])
+                if ( (isset($parameters['halt'])) && ($parameters['halt']))
                     return $parameters['return'];
             }
 
