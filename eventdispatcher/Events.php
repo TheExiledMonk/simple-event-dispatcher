@@ -142,13 +142,13 @@ namespace simple_event_dispatcher {
                 
                 $result = call_user_func_array($function, array($namespace, $event, &$merged_parameters));
                 
-                if (isset($result)) $parameters['return'] = $result;
-                if ( (isset($parameters['halt'])) && ($parameters['halt']))
-                    return $parameters['return'];
+                if (isset($result)) $merged_parameters['return'] = $result;
+                if ( (isset($merged_parameters['halt'])) && ($merged_parameters['halt']))
+                    return $merged_parameters['return'];
             }
 
-            if (isset($parameters['return']))
-                return $parameters['return'];
+            if (isset($merged_parameters['return']))
+                return $merged_parameters['return'];
         }
 
         
