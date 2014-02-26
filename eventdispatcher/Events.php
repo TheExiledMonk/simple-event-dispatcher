@@ -101,7 +101,7 @@ namespace simple_event_dispatcher {
          * @param array $parameters Associated array of parameters. 
          * @return mixed
          */
-        public static function trigger($namespace, $event, array $parameters = NULL) {           
+        public static function trigger($namespace, $event, array $parameters = NULL) {       
             $merged = array();
             if (!$parameters)
                 $parameters = array();
@@ -111,7 +111,7 @@ namespace simple_event_dispatcher {
                     'return' => null
                 );
             
-            $parameters = array_merge($default, $parameters);
+            $merged_parameters = array_merge($default, $parameters);
             
             if (!self::$events)
                 self::$events = array();
@@ -140,14 +140,15 @@ namespace simple_event_dispatcher {
             foreach ($merged as $function) {
                 $result = null;
                 
-                $result = call_user_func_array($function, array($namespace, $event, $parameters));
+                $result = call_user_func_array($function, array($namespace, $event, &$merged_parameters));
                 
                 if (isset($result)) $parameters['return'] = $result;
                 if ( (isset($parameters['halt'])) && ($parameters['halt']))
                     return $parameters['return'];
             }
 
-            return $parameters['return'];
+            if (isset($parameters['return']))
+                return $parameters['return'];
         }
 
         
